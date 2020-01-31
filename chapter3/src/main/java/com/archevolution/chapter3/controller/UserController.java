@@ -1,4 +1,4 @@
-package com.archevolution.chapter1.controller;
+package com.archevolution.chapter3.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

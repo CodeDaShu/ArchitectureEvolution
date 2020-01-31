@@ -1,4 +1,4 @@
-package com.archevolution.chapter1;
+package com.archevolution.chapter3;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
