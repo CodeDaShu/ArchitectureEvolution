@@ -1,5 +1,8 @@
 package com.archevolution.chapter4.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -230,5 +233,46 @@ public class UserController {
 		}
 		
         return res;
+    }
+	
+	/**
+	 * 批量增加 users
+	 * http://127.0.0.1:8088/insertUser3
+	 * 
+	 * @param userDtoList
+	 * @return
+	 */
+	@RequestMapping(value = "/insertUser3",headers = {"content-type=application/json"})
+	@ResponseBody
+    public JsonResponse insertUser3(@RequestBody List<UserDto> userDtoList){
+		
+		JsonResponse res = new JsonResponse();
+		
+		if(userDtoList == null || userDtoList.size() < 1){
+			res.setCode(ResponseCode.PARAMETER_ERROR);
+			res.setMessage("参数不能为空");
+			return res;
+		}
+		
+		//DTO 转成  Model
+		
+		List<User> userList = new ArrayList<User>();
+		
+		for(UserDto userDto : userDtoList){
+			if(userDto != null){
+				User user = new User();
+				user.setUserName(userDto.getUserName());
+				user.setGender(userDto.getGender());
+				user.setAge(userDto.getAge());
+				
+				userList.add(user);
+			}
+		}
+		
+		userService.insertUserList(userList);
+		
+		res.setCode(ResponseCode.SUCCESS);
+		
+        return res ;
     }
 }

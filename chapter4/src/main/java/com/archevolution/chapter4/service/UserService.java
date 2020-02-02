@@ -1,5 +1,7 @@
 package com.archevolution.chapter4.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,7 @@ public class UserService {
 	@Autowired
 	UserDao userDao;
 	
-	public User queryUserById(int userId) throws Exception{
+	public User queryUserById(int userId) /*throws Exception*/{
 		return userDao.queryUserById(userId);
 	}
 	
@@ -34,5 +36,9 @@ public class UserService {
 	
 	public void deleteUserById(int userId){
 		userDao.deleteUserById(userId);
+	}
+	
+	public void insertUserList(List<User> userList){
+		userDao.insertUserList(userList);
 	}
 }

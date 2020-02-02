@@ -1,5 +1,7 @@
 package com.archevolution.chapter4.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -64,5 +66,19 @@ public interface UserDao {
 	 */
 	@Delete("DELETE FROM USER WHERE userid = #{userId}")
 	public void deleteUserById(@Param("userId") int userId);
+	
+	/**
+	 * 新增操作
+	 * @param user
+	 */
+	@Insert({
+		"<script>"
+		+ "INSERT INTO USER(userName, gender, age) values"
+		+ "<foreach collection='userList' item='item' index='index' separator=','>"
+		+ " (#{item.userName}, #{item.gender}, #{item.age})"
+		+ "</foreach>"
+		+ "</script>"
+		})
+	public void insertUserList(@Param(value="userList") List<User> userList);
 	
 }
