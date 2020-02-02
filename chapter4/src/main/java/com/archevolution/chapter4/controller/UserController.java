@@ -80,4 +80,75 @@ public class UserController {
 		
         return user == null ? "User is not find" : user.toString() ;
     }
+	
+	/**
+	 * 新增操作
+	 * http://127.0.0.1:8088/insertUser/zhangsan/F/20
+	 * 
+	 * @param userName
+	 * @param gender
+	 * @param age
+	 * @return
+	 */
+	@RequestMapping(value = "/insertUser/{userName}/{gender}/{age}")
+	@ResponseBody
+    public String insertUser(@PathVariable("userName") String userName ,
+    		@PathVariable("gender") String gender ,@PathVariable("age") int age){
+		
+		if("".equals(userName) || "".equals(gender) || "".equals(age)){
+			return "参数不能为空";
+		}
+		
+		User user = new User();
+		user.setUserName(userName);
+		user.setGender(gender);
+		user.setAge(age);
+		userService.insertUser(user);
+		
+        return "Success" ;
+    }
+	
+	/**
+	 * 根据用户 ID 修改客户手机号
+	 * http://127.0.0.1:8088/updateUserTel/2/18000000000
+	 * 
+	 * @param userId
+	 * @param telephone
+	 * @return
+	 */
+	@RequestMapping(value = "/updateUserTel/{userId}/{telephone}")
+	@ResponseBody
+    public String updateUserTel(@PathVariable("userId") int userId , @PathVariable("telephone") String telephone){
+		
+		if("".equals(userId) || "".equals(telephone)){
+			return "参数不能为空";
+		}
+		
+		User user = new User();
+		user.setUserId(userId);
+		user.setTelephone(telephone);
+		userService.updateUserTel(user);
+		
+        return "Success" ;
+    }
+
+	/**
+	 * 根据用户 ID 删除数据
+	 * http://127.0.0.1:8088/deleteUser/1
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping(value = "/deleteUser/{userId}")
+	@ResponseBody
+	public String deleteUser(@PathVariable("userId") int userId ){
+		
+		if("".equals(userId)){
+			return "参数不能为空";
+		}
+
+		userService.deleteUserById(userId);
+		
+        return "Success" ;
+    }
 }

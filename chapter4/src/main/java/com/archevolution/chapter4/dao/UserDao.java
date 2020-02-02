@@ -1,10 +1,13 @@
 package com.archevolution.chapter4.dao;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.archevolution.chapter4.model.User;
 
@@ -39,4 +42,27 @@ public interface UserDao {
 		@Result(property = "telephone" , column = "mobilephone")	
 	})
 	public User queryUserTelById2(@Param("userId") String userId);
+	
+	/**
+	 * 新增操作
+	 * @param user
+	 */
+	@Insert("INSERT INTO USER(userName, gender, age) values"
+			+ " (#{userName}, #{gender}, #{age})")
+	public void insertUser(User user);
+	
+	/**
+	 * 修改客户手机号操作
+	 * @param user
+	 */
+	@Update("UPDATE USER SET mobilephone = #{telephone} WHERE userid = #{userId}")
+	public void updateUserTel(User user);
+	
+	/**
+	 * 删除操作
+	 * @param userId
+	 */
+	@Delete("DELETE FROM USER WHERE userid = #{userId}")
+	public void deleteUserById(@Param("userId") int userId);
+	
 }
