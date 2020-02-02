@@ -22,7 +22,7 @@ public interface UserDao {
 	 * @return
 	 */
 	@Select("SELECT userId, userName, gender, age FROM USER WHERE userId = #{userId}")
-	public User queryUserById(@Param("userId") String userId);
+	public User queryUserById(@Param("userId") int userId);
 	
 	/**
 	 * 增加了电话号码字段，通过别名的方式，查询方法
@@ -30,7 +30,7 @@ public interface UserDao {
 	 * @return
 	 */
 	@Select("SELECT userId, userName, gender, age, mobilephone as telephone FROM USER WHERE userId = #{userId}")
-	public User queryUserTelById(@Param("userId") String userId);
+	public User queryUserTelById(@Param("userId") int userId);
 	
 	/**
 	 * 增加了电话号码字段，通过 @Results 的方式，查询方法
@@ -41,7 +41,7 @@ public interface UserDao {
 	@Results({
 		@Result(property = "telephone" , column = "mobilephone")	
 	})
-	public User queryUserTelById2(@Param("userId") String userId);
+	public User queryUserTelById2(@Param("userId") int userId);
 	
 	/**
 	 * 新增操作

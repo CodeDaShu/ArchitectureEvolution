@@ -3,10 +3,14 @@ package com.archevolution.chapter4.controller;
 import org.apache.ibatis.annotations.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.archevolution.chapter4.dto.JsonResponse;
+import com.archevolution.chapter4.dto.ResponseCode;
+import com.archevolution.chapter4.dto.UserDto;
 import com.archevolution.chapter4.model.User;
 import com.archevolution.chapter4.service.UserService;
 
@@ -30,11 +34,11 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/queryUser/{userId}")
 	@ResponseBody
-    public String queryUserById(@PathVariable("userId") String userId){
+    public String queryUserById(@PathVariable("userId") int userId){
 		System.out.println("queryUserById userId = " + userId);
 		
-		if("".equals(userId)){
-			return "参数不能为空";
+		if(userId < 1){
+			return "参数不正确";
 		}
 		
 		User user = userService.queryUserById(userId);
@@ -49,11 +53,11 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/queryUserTel/{userId}")
 	@ResponseBody
-    public String queryUserTelById(@PathVariable("userId") String userId){
+    public String queryUserTelById(@PathVariable("userId") int userId){
 		System.out.println("queryUserById userId = " + userId);
-		
-		if("".equals(userId)){
-			return "参数不能为空";
+
+		if(userId < 1){
+			return "参数不正确";
 		}
 		
 		User user = userService.queryUserTelById(userId);
@@ -69,11 +73,11 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/queryUserTel2/{userId}")
 	@ResponseBody
-    public String queryUserTelById2(@PathVariable("userId") String userId){
+    public String queryUserTelById2(@PathVariable("userId") int userId){
 		System.out.println("queryUserById userId = " + userId);
-		
-		if("".equals(userId)){
-			return "参数不能为空";
+
+		if(userId < 1){
+			return "参数不正确";
 		}
 		
 		User user = userService.queryUserTelById2(userId);
@@ -119,8 +123,12 @@ public class UserController {
 	@RequestMapping(value = "/updateUserTel/{userId}/{telephone}")
 	@ResponseBody
     public String updateUserTel(@PathVariable("userId") int userId , @PathVariable("telephone") String telephone){
+
+		if(userId < 1){
+			return "参数不正确";
+		}
 		
-		if("".equals(userId) || "".equals(telephone)){
+		if("".equals(telephone)){
 			return "参数不能为空";
 		}
 		
@@ -143,12 +151,84 @@ public class UserController {
 	@ResponseBody
 	public String deleteUser(@PathVariable("userId") int userId ){
 		
-		if("".equals(userId)){
-			return "参数不能为空";
+		if(userId < 1){
+			return "参数不正确";
 		}
 
 		userService.deleteUserById(userId);
 		
         return "Success" ;
+    }
+	
+	/**
+	 * 新增操作
+	 * 使用了 Josn 作为参数，需要设置 headers = {"content-type=application/json"}
+	 * @RequestBody UserDto userDto 可以让 JSON 串自动和 UserDto 绑定和转换
+	 * 
+	 * http://127.0.0.1:8088/insertUser2
+	 * 
+	 * 
+	 * 
+	 * @param userName
+	 * @param gender
+	 * @param age
+	 * @return
+	 */
+	@RequestMapping(value = "/insertUser2",headers = {"content-type=application/json"})
+	@ResponseBody
+    public String insertUser2(@RequestBody UserDto userDto){
+		
+		if("".equals(userDto.getUserName()) || "".equals(userDto.getGender()) || "".equals(userDto.getAge())){
+			return "参数不能为空";
+		}
+		
+		//DTO 转成  Model
+		User user = new User();
+		user.setUserName(userDto.getUserName());
+		user.setGender(userDto.getGender());
+		user.setAge(userDto.getAge());
+		
+		userService.insertUser(user);
+		
+        return "Success" ;
+    }
+	
+	/**
+	 * 根据用户 ID 查询用户信息（不带手机号）
+	 * 
+	 * http://127.0.0.1:8088/queryUser2
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping(value = "/queryUser2")
+	@ResponseBody
+    public JsonResponse queryUser2ById(@RequestBody UserDto userDto){
+		JsonResponse res = new JsonResponse();
+		
+		if(userDto.getUserId() < 1){
+			res.setCode(ResponseCode.PARAMETER_ERROR);
+			res.setMessage("参数不能为空");
+			return res;
+		}
+		
+		User user = new User();
+		
+		try {
+			user = userService.queryUserById(userDto.getUserId());
+		} catch (Exception e) {
+			res.setCode(ResponseCode.FAIL);
+			res.setMessage("服务异常");
+		}
+		
+		if(user != null){
+			res.setCode(ResponseCode.SUCCESS);
+			res.setData(user);;
+		}else{
+			res.setCode(ResponseCode.SUCCESS_NULL);
+			res.setMessage("查询不到数据");
+		}
+		
+        return res;
     }
 }

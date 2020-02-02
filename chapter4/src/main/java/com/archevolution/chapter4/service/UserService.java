@@ -12,15 +12,15 @@ public class UserService {
 	@Autowired
 	UserDao userDao;
 	
-	public User queryUserById(String userId){
+	public User queryUserById(int userId) throws Exception{
 		return userDao.queryUserById(userId);
 	}
 	
-	public User queryUserTelById(String userId){
+	public User queryUserTelById(int userId){
 		return userDao.queryUserTelById(userId);
 	}
 	
-	public User queryUserTelById2(String userId){
+	public User queryUserTelById2(int userId){
 		return userDao.queryUserTelById2(userId);
 	}
 	
