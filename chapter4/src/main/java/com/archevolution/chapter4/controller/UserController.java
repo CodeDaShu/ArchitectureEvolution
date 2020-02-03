@@ -170,7 +170,12 @@ public class UserController {
 	 * 
 	 * http://127.0.0.1:8088/insertUser2
 	 * 
-	 * 
+	 * {
+		    "userName": "lisi", 
+		    "gender": "M", 
+		    "age": "40", 
+		    "telephone": "18600000000"
+		}
 	 * 
 	 * @param userName
 	 * @param gender
@@ -239,6 +244,20 @@ public class UserController {
 	 * 批量增加 users
 	 * http://127.0.0.1:8088/insertUser3
 	 * 
+	 *  [
+		    {
+		        "userName": "Tom", 
+		        "gender": "M", 
+		        "age": "22", 
+		        "telephone": "18600000001"
+		    }, 
+		    {
+		        "userName": "Cat", 
+		        "gender": "M", 
+		        "age": "33", 
+		        "telephone": "18000000000"
+		    }
+		]
 	 * @param userDtoList
 	 * @return
 	 */
