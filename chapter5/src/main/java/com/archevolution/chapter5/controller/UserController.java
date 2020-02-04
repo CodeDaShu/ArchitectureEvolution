@@ -1,4 +1,4 @@
-package com.archevolution.chapter4.controller;
+package com.archevolution.chapter5.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.archevolution.chapter4.dto.JsonResponse;
-import com.archevolution.chapter4.dto.ResponseCode;
-import com.archevolution.chapter4.dto.UserDto;
-import com.archevolution.chapter4.model.User;
-import com.archevolution.chapter4.service.UserService;
+import com.archevolution.chapter5.dto.JsonResponse;
+import com.archevolution.chapter5.dto.ResponseCode;
+import com.archevolution.chapter5.dto.UserDto;
+import com.archevolution.chapter5.model.User;
+import com.archevolution.chapter5.service.UserService;
 
 @RestController
 public class UserController {
