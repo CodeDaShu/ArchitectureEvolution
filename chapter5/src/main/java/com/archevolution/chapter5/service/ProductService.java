@@ -13,6 +13,7 @@ public class ProductService {
 	ProductDao productDao;
 	
 	public Product findOneByProductid(int productid){
-		return productDao.findOneByProductid(productid);
+		//return productDao.findOneByProductid(productid);
+		return productDao.findById(productid);
 	}
 }
