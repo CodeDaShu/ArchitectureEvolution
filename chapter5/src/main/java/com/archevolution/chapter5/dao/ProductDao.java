@@ -1,14 +1,18 @@
 package com.archevolution.chapter5.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.jpa.domain.JpaSort;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.archevolution.chapter5.model.Product;
 
@@ -17,6 +21,9 @@ public interface ProductDao extends PagingAndSortingRepository<Product, Integer>
 	
 	//按照ID查询
 	public Product findById(int productid);
+	
+	//按照ID查询
+	public Product findByProductname(String productname);
 	
 	//查询所有
 	public List<Product> findAll();
@@ -48,4 +55,22 @@ public interface ProductDao extends PagingAndSortingRepository<Product, Integer>
 	
 	@Query("select u from Product u where u.type = ?1")
 	public List<Product> findByTypeOrder(String type, Order order);
+	
+	//分页
+	@Query("select u from Product u where u.type = ?1")
+	public List<Product> findByTypePage(String type, Pageable pageable);
+	
+	public Product findFirstByTypeOrderByProductidDesc(String type);
+	
+	//修改
+	@Transactional
+	@Modifying
+	@Query("update Product u set u.price = ?1 where u.productname = ?2")
+	int updateProduct(BigDecimal price, String productname);
+	
+	void deleteByProductname(String productname);
+	
+	@Modifying
+	@Query("delete Product u where u.productname = ?1")
+	void deleteByProductnameQuerty(String productname);
 }

@@ -1,11 +1,14 @@
 package com.archevolution.chapter5;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.JpaSort;
@@ -131,5 +134,71 @@ public class ProductDaoTests {
 		Product product2 = productList.get(productList.size() - 1);
 		
 		assertEquals("Huawei Mate30 Pro", product2.getProductname());
+	}
+	
+	//分页方法测试
+	@Test
+	public void testFindByTypePage() {
+		String type = "1";
+		
+		int page = 0;
+		
+		int size = 10;
+		
+		PageRequest pageable = PageRequest.of(page, size, Sort.Direction.DESC, "productid");
+		
+		List<Product> productList = productDao.findByTypePage(type, pageable);
+		
+		Product product = productList.get(productList.size() - 1);
+		
+		assertEquals("Huawei Mate30 Pro", product.getProductname());
+
+		//--------------------------------------------------------------
+		
+		Product product2 = productDao.findFirstByTypeOrderByProductidDesc(type);
+		
+		assertEquals("Xiaomi CC9 Pro", product2.getProductname());
+	}
+	
+	//新增方法
+	@Test
+	public void testSave(){
+		Product product = new Product();
+		
+		product.setProductname("C++ Primer Plus");
+		product.setType("2");
+		product.setPrice(new BigDecimal("78.00"));
+		
+		productDao.save(product);
+		
+		Product product2 = productDao.findByProductname("C++ Primer Plus");
+		assertEquals(new BigDecimal("78.00"), product2.getPrice());
+	}
+
+	//修改方法
+	@Test
+	public void testUpdate(){
+		
+		Product product = productDao.findByProductname("数学之美");
+		
+		if(product == null){
+			product = new Product();
+			
+			product.setProductname("数学之美");
+			product.setType("2");
+			product.setPrice(new BigDecimal("36.50"));
+			
+			productDao.save(product);
+		}else{
+			productDao.updateProduct(new BigDecimal("36.50"), "数学之美");
+		}
+		
+		Product product2 = productDao.findByProductname("数学之美");
+		assertEquals(new BigDecimal("36.50"), product2.getPrice());
+		
+		productDao.updateProduct(new BigDecimal("30.50"), "数学之美");
+		
+		product2 = productDao.findByProductname("数学之美");
+		assertEquals(new BigDecimal("30.50"), product2.getPrice());
 	}
 }
