@@ -1,21 +1,31 @@
 package com.archevolution.chapter5.model;
 
 public class User {
-	private int userId;
+	private int id;//主键ID，自增长
 	
-	private String userName;
+	private String userId;//用户ID，或看做登录名
 	
-	private String gender;
+	private String userName;//用户姓名
 	
-	private int age;
+	private String gender;//性别
 	
-	private String telephone;
+	private int age;//年龄
+	
+	private String telephone;//手机号
 
-	public int getUserId() {
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -53,9 +63,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName
-				+ ", gender=" + gender + ", age=" + age + ", telephone="
-				+ telephone + "]";
+		return "User [id=" + id + ", userId=" + userId + ", userName="
+				+ userName + ", gender=" + gender + ", age=" + age
+				+ ", telephone=" + telephone + "]";
 	}
 	
 }

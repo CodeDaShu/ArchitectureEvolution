@@ -1,7 +1,9 @@
 package com.archevolution.chapter5.dto;
 
 public class UserDto {
-	private int userId;
+	private int id;
+	
+	private String userId;
 	
 	private String userName;
 	
@@ -11,11 +13,19 @@ public class UserDto {
 	
 	private String telephone;
 
-	public int getUserId() {
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -49,5 +59,12 @@ public class UserDto {
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+
+	@Override
+	public String toString() {
+		return "UserDto [id=" + id + ", userId=" + userId + ", userName="
+				+ userName + ", gender=" + gender + ", age=" + age
+				+ ", telephone=" + telephone + "]";
 	}
 }

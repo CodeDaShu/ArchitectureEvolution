@@ -20,52 +20,52 @@ public interface UserDao {
 	
 	/**
 	 * 查询方法
-	 * @param userId
+	 * @param id
 	 * @return
 	 */
-	@Select("SELECT userId, userName, gender, age FROM USER WHERE userId = #{userId}")
-	public User queryUserById(@Param("userId") int userId);
+	@Select("SELECT id, userId, userName, gender, age FROM USER WHERE id = #{id}")
+	public User queryUserById(@Param("id") int id);
 	
 	/**
 	 * 增加了电话号码字段，通过别名的方式，查询方法
-	 * @param userId
+	 * @param id
 	 * @return
 	 */
-	@Select("SELECT userId, userName, gender, age, mobilephone as telephone FROM USER WHERE userId = #{userId}")
-	public User queryUserTelById(@Param("userId") int userId);
+	@Select("SELECT id, userId, userName, gender, age, mobilephone as telephone FROM USER WHERE id = #{id}")
+	public User queryUserTelById(@Param("id") int id);
 	
 	/**
 	 * 增加了电话号码字段，通过 @Results 的方式，查询方法
 	 * @param userId
 	 * @return
 	 */
-	@Select("SELECT userId, userName, gender, age, mobilephone FROM USER WHERE userId = #{userId}")
+	@Select("SELECT id, userId, userName, gender, age, mobilephone FROM USER WHERE id = #{id}")
 	@Results({
 		@Result(property = "telephone" , column = "mobilephone")	
 	})
-	public User queryUserTelById2(@Param("userId") int userId);
+	public User queryUserTelById2(@Param("id") int id);
 	
 	/**
 	 * 新增操作
 	 * @param user
 	 */
-	@Insert("INSERT INTO USER(userName, gender, age) values"
-			+ " (#{userName}, #{gender}, #{age})")
+	@Insert("INSERT INTO USER(userId, userName, gender, age) values"
+			+ " (#{userId}, #{userName}, #{gender}, #{age})")
 	public void insertUser(User user);
 	
 	/**
 	 * 修改客户手机号操作
 	 * @param user
 	 */
-	@Update("UPDATE USER SET mobilephone = #{telephone} WHERE userid = #{userId}")
+	@Update("UPDATE USER SET mobilephone = #{telephone} WHERE id = #{id}")
 	public void updateUserTel(User user);
 	
 	/**
 	 * 删除操作
 	 * @param userId
 	 */
-	@Delete("DELETE FROM USER WHERE userid = #{userId}")
-	public void deleteUserById(@Param("userId") int userId);
+	@Delete("DELETE FROM USER WHERE id = #{id}")
+	public void deleteUserById(@Param("id") int id);
 	
 	/**
 	 * 新增操作
@@ -73,9 +73,9 @@ public interface UserDao {
 	 */
 	@Insert({
 		"<script>"
-		+ "INSERT INTO USER(userName, gender, age) values"
+		+ "INSERT INTO USER(userId, userName, gender, age) values"
 		+ "<foreach collection='userList' item='item' index='index' separator=','>"
-		+ " (#{item.userName}, #{item.gender}, #{item.age})"
+		+ " (#{item.userId}, #{item.userName}, #{item.gender}, #{item.age})"
 		+ "</foreach>"
 		+ "</script>"
 		})

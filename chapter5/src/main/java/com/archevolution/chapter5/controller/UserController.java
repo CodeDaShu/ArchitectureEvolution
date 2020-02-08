@@ -35,16 +35,16 @@ public class UserController {
 	 * @param userId
 	 * @return
 	 */
-	@RequestMapping(value = "/queryUser/{userId}")
+	@RequestMapping(value = "/queryUser/{id}")
 	@ResponseBody
-    public String queryUserById(@PathVariable("userId") int userId){
-		System.out.println("queryUserById userId = " + userId);
+    public String queryUserById(@PathVariable("id") int id){
+		System.out.println("queryUserById id = " + id);
 		
-		if(userId < 1){
+		if(id < 1){
 			return "参数不正确";
 		}
 		
-		User user = userService.queryUserById(userId);
+		User user = userService.queryUserById(id);
 		
         return user == null ? "User is not find" : user.toString() ;
     }
@@ -54,16 +54,16 @@ public class UserController {
 	 * @param userId
 	 * @return
 	 */
-	@RequestMapping(value = "/queryUserTel/{userId}")
+	@RequestMapping(value = "/queryUserTel/{id}")
 	@ResponseBody
-    public String queryUserTelById(@PathVariable("userId") int userId){
-		System.out.println("queryUserById userId = " + userId);
+    public String queryUserTelById(@PathVariable("id") int id){
+		System.out.println("queryUserById id = " + id);
 
-		if(userId < 1){
+		if(id < 1){
 			return "参数不正确";
 		}
 		
-		User user = userService.queryUserTelById(userId);
+		User user = userService.queryUserTelById(id);
 		
         return user == null ? "User is not find" : user.toString() ;
     }
@@ -74,39 +74,41 @@ public class UserController {
 	 * @param userId
 	 * @return
 	 */
-	@RequestMapping(value = "/queryUserTel2/{userId}")
+	@RequestMapping(value = "/queryUserTel2/{id}")
 	@ResponseBody
-    public String queryUserTelById2(@PathVariable("userId") int userId){
-		System.out.println("queryUserById userId = " + userId);
+    public String queryUserTelById2(@PathVariable("id") int id){
+		System.out.println("queryUserById id = " + id);
 
-		if(userId < 1){
+		if(id < 1){
 			return "参数不正确";
 		}
 		
-		User user = userService.queryUserTelById2(userId);
+		User user = userService.queryUserTelById2(id);
 		
         return user == null ? "User is not find" : user.toString() ;
     }
 	
 	/**
 	 * 新增操作
-	 * http://127.0.0.1:8088/insertUser/zhangsan/F/20
+	 * http://127.0.0.1:8088/insertUser/zhangsan/张三/M/30
 	 * 
 	 * @param userName
 	 * @param gender
 	 * @param age
 	 * @return
 	 */
-	@RequestMapping(value = "/insertUser/{userName}/{gender}/{age}")
+	@RequestMapping(value = "/insertUser/{userId}/{userName}/{gender}/{age}")
 	@ResponseBody
-    public String insertUser(@PathVariable("userName") String userName ,
+    public String insertUser(@PathVariable("userId") String userId ,@PathVariable("userName") String userName ,
     		@PathVariable("gender") String gender ,@PathVariable("age") int age){
 		
-		if("".equals(userName) || "".equals(gender) || "".equals(age)){
+		if("".equals(userId) || "".equals(userName) 
+				|| "".equals(gender) || "".equals(age)){
 			return "参数不能为空";
 		}
 		
 		User user = new User();
+		user.setUserId(userId);
 		user.setUserName(userName);
 		user.setGender(gender);
 		user.setAge(age);
@@ -123,11 +125,11 @@ public class UserController {
 	 * @param telephone
 	 * @return
 	 */
-	@RequestMapping(value = "/updateUserTel/{userId}/{telephone}")
+	@RequestMapping(value = "/updateUserTel/{id}/{telephone}")
 	@ResponseBody
-    public String updateUserTel(@PathVariable("userId") int userId , @PathVariable("telephone") String telephone){
+    public String updateUserTel(@PathVariable("id") int id , @PathVariable("telephone") String telephone){
 
-		if(userId < 1){
+		if(id < 1){
 			return "参数不正确";
 		}
 		
@@ -136,7 +138,7 @@ public class UserController {
 		}
 		
 		User user = new User();
-		user.setUserId(userId);
+		user.setId(id);
 		user.setTelephone(telephone);
 		userService.updateUserTel(user);
 		
@@ -150,15 +152,15 @@ public class UserController {
 	 * @param userId
 	 * @return
 	 */
-	@RequestMapping(value = "/deleteUser/{userId}")
+	@RequestMapping(value = "/deleteUser/{id}")
 	@ResponseBody
-	public String deleteUser(@PathVariable("userId") int userId ){
+	public String deleteUser(@PathVariable("id") int id ){
 		
-		if(userId < 1){
+		if(id < 1){
 			return "参数不正确";
 		}
 
-		userService.deleteUserById(userId);
+		userService.deleteUserById(id);
 		
         return "Success" ;
     }
@@ -171,10 +173,11 @@ public class UserController {
 	 * http://127.0.0.1:8088/insertUser2
 	 * 
 	 * { 
-		    "userName": "lisi", 
-		    "gender": "M", 
-		    "age": "40", 
-		    "telephone": "18600000000"
+			"userId": "lisi", 
+			"userName": "李四", 
+			"gender": "F", 
+			"age": "40", 
+			"telephone": "18600000000"
 		}
 	 * 
 	 * @param userName
@@ -186,12 +189,14 @@ public class UserController {
 	@ResponseBody
     public String insertUser2(@RequestBody UserDto userDto){
 		
-		if("".equals(userDto.getUserName()) || "".equals(userDto.getGender()) || "".equals(userDto.getAge())){
+		if("".equals(userDto.getUserId()) || "".equals(userDto.getUserName()) 
+				|| "".equals(userDto.getGender()) || "".equals(userDto.getAge())){
 			return "参数不能为空";
 		}
 		
 		//DTO 转成  Model
 		User user = new User();
+		user.setUserId(userDto.getUserId());
 		user.setUserName(userDto.getUserName());
 		user.setGender(userDto.getGender());
 		user.setAge(userDto.getAge());
@@ -214,7 +219,7 @@ public class UserController {
     public JsonResponse queryUser2ById(@RequestBody UserDto userDto){
 		JsonResponse res = new JsonResponse();
 		
-		if(userDto.getUserId() < 1){
+		if(userDto.getId() < 1){
 			res.setCode(ResponseCode.PARAMETER_ERROR);
 			res.setMessage("参数不能为空");
 			return res;
@@ -223,7 +228,7 @@ public class UserController {
 		User user = new User();
 		
 		try {
-			user = userService.queryUserById(userDto.getUserId());
+			user = userService.queryUserById(userDto.getId());
 		} catch (Exception e) {
 			res.setCode(ResponseCode.FAIL);
 			res.setMessage("服务异常");
@@ -246,13 +251,15 @@ public class UserController {
 	 * 
 	 *  [
 		    {
-		        "userName": "Tom", 
+		    	"userId": "Tom", 
+		        "userName": "王汤姆", 
 		        "gender": "M", 
 		        "age": "22", 
 		        "telephone": "18600000001"
 		    }, 
 		    {
-		        "userName": "Cat", 
+		    	"userId": "Jerry", 
+		        "userName": "李杰瑞", 
 		        "gender": "M", 
 		        "age": "33", 
 		        "telephone": "18000000000"
@@ -280,6 +287,7 @@ public class UserController {
 		for(UserDto userDto : userDtoList){
 			if(userDto != null){
 				User user = new User();
+				user.setUserId(userDto.getUserId());
 				user.setUserName(userDto.getUserName());
 				user.setGender(userDto.getGender());
 				user.setAge(userDto.getAge());
