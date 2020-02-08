@@ -1,20 +1,21 @@
---´´½¨ user ±í
+--ç”¨æˆ·è¡¨
 CREATE TABLE IF NOT EXISTS `user`(
-   `userid` INT UNSIGNED AUTO_INCREMENT,
+   `id` INT UNSIGNED AUTO_INCREMENT,    
+   `userid` VARCHAR(100) NOT NULL,
    `username` VARCHAR(100) NOT NULL,
    `gender` CHAR(1) NOT NULL,
    `age` INT NOT NULL,
-   PRIMARY KEY ( `userid` )
+   PRIMARY KEY ( `id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---²åÈëÒ»ÌõÊı¾İ
-insert into user(username, gender, age) values('dashu','M',18);
+--ç”¨æˆ·è¡¨æ’å…¥æ•°æ®
+insert into user(userid ,username, gender, age) values('dashu','å¤§å”','M',18);
 
---Èç¹û MySQL 8.0 ¿Í»§¶ËÁ¬½Ó±¨´í£ºauthentication plugin caching_sha2_password
+--å½“é‡åˆ° authentication plugin caching_sha2_password é”™è¯¯
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
 
---Ôö¼ÓÊÖ»úºÅ×Ö¶Î
+--ç”¨æˆ·è¡¨å¢åŠ æ‰‹æœºå·å­—æ®µ
 ALTER TABLE user ADD mobilephone varchar(15) ;
 
---¸üĞÂ userid = 1 Êı¾İµÄÊÖ»úºÅ
+--ä¿®æ”¹æ‰‹æœºå·
 update user set mobilephone = '13800000000' where userid = '1';

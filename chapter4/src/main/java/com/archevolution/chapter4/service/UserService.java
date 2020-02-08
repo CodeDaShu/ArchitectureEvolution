@@ -14,16 +14,16 @@ public class UserService {
 	@Autowired
 	UserDao userDao;
 	
-	public User queryUserById(int userId) /*throws Exception*/{
-		return userDao.queryUserById(userId);
+	public User queryUserById(int id) /*throws Exception*/{
+		return userDao.queryUserById(id);
 	}
 	
-	public User queryUserTelById(int userId){
-		return userDao.queryUserTelById(userId);
+	public User queryUserTelById(int id){
+		return userDao.queryUserTelById(id);
 	}
 	
-	public User queryUserTelById2(int userId){
-		return userDao.queryUserTelById2(userId);
+	public User queryUserTelById2(int id){
+		return userDao.queryUserTelById2(id);
 	}
 	
 	public void insertUser(User user){
@@ -34,8 +34,8 @@ public class UserService {
 		userDao.updateUserTel(user);
 	}
 	
-	public void deleteUserById(int userId){
-		userDao.deleteUserById(userId);
+	public void deleteUserById(int id){
+		userDao.deleteUserById(id);
 	}
 	
 	public void insertUserList(List<User> userList){
