@@ -12,8 +12,8 @@ public class ProductService {
 	@Autowired
 	ProductDao productDao;
 	
-	public Product findOneByProductid(int productid){
-		//return productDao.findOneByProductid(productid);
-		return productDao.findById(productid);
+	public Product findOneById(int id){
+		//return productDao.findOneById(id);
+		return productDao.findById(id);
 	}
 }

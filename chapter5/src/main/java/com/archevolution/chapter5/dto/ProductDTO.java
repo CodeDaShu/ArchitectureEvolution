@@ -3,15 +3,21 @@ package com.archevolution.chapter5.dto;
 import java.math.BigDecimal;
 
 public class ProductDTO {
-	private int productid;
+	private int id;
+	private String productid;
 	private String productname;
 	private String type;
 	private BigDecimal price;
-	
-	public int getProductid() {
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getProductid() {
 		return productid;
 	}
-	public void setProductid(int productid) {
+	public void setProductid(String productid) {
 		this.productid = productid;
 	}
 	public String getProductname() {
@@ -32,6 +38,4 @@ public class ProductDTO {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
-
-
 }

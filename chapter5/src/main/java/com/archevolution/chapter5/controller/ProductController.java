@@ -28,18 +28,18 @@ public class ProductController {
 	 * @param userId
 	 * @return
 	 */
-	@RequestMapping(value = "/queryProduct/{productId}")
+	@RequestMapping(value = "/queryProduct/{id}")
 	@ResponseBody
-    public JsonResponse queryUserById(@PathVariable("productId") int productId){
+    public JsonResponse queryUserById(@PathVariable("id") int id){
 		JsonResponse res = new JsonResponse();
 		
-		if(productId < 1){
+		if(id < 1){
 			res.setCode(ResponseCode.PARAMETER_ERROR);
 			res.setMessage("参数不正确");
 			return res;
 		}
 		
-		Product product = productService.findOneByProductid(productId);
+		Product product = productService.findOneById(id);
 		
 		if(product != null){
 			res.setCode(ResponseCode.SUCCESS);

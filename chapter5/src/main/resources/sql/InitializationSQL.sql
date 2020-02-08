@@ -22,12 +22,13 @@ update user set mobilephone = '13800000000' where userid = '1';
 
 --产品表
 CREATE TABLE IF NOT EXISTS `product`(
-   `productid` INT UNSIGNED AUTO_INCREMENT,
+   `id` INT UNSIGNED AUTO_INCREMENT,     
+   `productid` VARCHAR(100) NOT NULL,
    `productname` VARCHAR(100) NOT NULL,
    `type` CHAR(4) NOT NULL,
    `price` DECIMAL(10,2) NOT NULL,
-   PRIMARY KEY ( `productid` )
+   PRIMARY KEY ( `id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO product(productname, type, price) values ('Huawei Mate30 Pro', '1', 6899.00);
-INSERT INTO product(productname, type, price) values ('Xiaomi CC9 Pro', '1', 2599.00);
+INSERT INTO product(productid, productname, type, price) values ('0001MB0001','Huawei Mate30 Pro', '1', 6899.00);
+INSERT INTO product(productid, productname, type, price) values ('0001MB0002','Xiaomi CC9 Pro', '1', 2599.00);

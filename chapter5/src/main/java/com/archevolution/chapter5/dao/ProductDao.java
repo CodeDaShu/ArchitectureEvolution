@@ -17,12 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.archevolution.chapter5.model.Product;
 
 public interface ProductDao extends PagingAndSortingRepository<Product, Integer>  /*CrudRepository<Product, Integer>*/{
-	public Product findOneByProductid(int productid);
+	public Product findOneByProductid(String productid);
 	
 	//按照ID查询
-	public Product findById(int productid);
+	public Product findById(int id);
 	
-	//按照ID查询
+	//按照姓名查询
 	public Product findByProductname(String productname);
 	
 	//查询所有
@@ -37,7 +37,7 @@ public interface ProductDao extends PagingAndSortingRepository<Product, Integer>
 	
 	public List<Product> readByType(String type);
 	
-	public List<Product> findByTypeAndProductid(String type , int productid);
+	public List<Product> findByTypeAndProductid(String type , String productid);
 	
 	//绑定 SQL 查询语句
 	//@Query(value = "SELECT * FROM PRODUCT WHERE type = ?1", nativeQuery = true)
@@ -65,12 +65,14 @@ public interface ProductDao extends PagingAndSortingRepository<Product, Integer>
 	//修改
 	@Transactional
 	@Modifying
-	@Query("update Product u set u.price = ?1 where u.productname = ?2")
-	int updateProduct(BigDecimal price, String productname);
+	@Query("update Product u set u.price = ?1 where u.productid = ?2")
+	int updateProduct(BigDecimal price, String productid);
 	
 	void deleteByProductname(String productname);
 	
+	void deleteByProductid(String productid);
+	
 	@Modifying
-	@Query("delete Product u where u.productname = ?1")
-	void deleteByProductnameQuerty(String productname);
+	@Query("delete Product u where u.productid = ?1")
+	void deleteByProductidQuerty(String productid);
 }

@@ -41,7 +41,7 @@ public class ProductDaoTests {
 		List<Product> productList = productDao.findByType(type);
 		
 		for(Product product : productList){
-			if(1 == product.getProductid()){
+			if(1 == product.getId()){
 				assertEquals("Huawei Mate30 Pro", product.getProductname());
 			}
 		}
@@ -49,7 +49,7 @@ public class ProductDaoTests {
 		List<Product> productList2 = productDao.getByType(type);
 		
 		for(Product product : productList2){
-			if(1 == product.getProductid()){
+			if(1 == product.getId()){
 				assertEquals("Huawei Mate30 Pro", product.getProductname());
 			}
 		}
@@ -57,7 +57,7 @@ public class ProductDaoTests {
 		List<Product> productList3 = productDao.queryByType(type);
 		
 		for(Product product : productList3){
-			if(1 == product.getProductid()){
+			if(1 == product.getId()){
 				assertEquals("Huawei Mate30 Pro", product.getProductname());
 			}
 		}
@@ -65,15 +65,15 @@ public class ProductDaoTests {
 		List<Product> productList4 = productDao.readByType(type);
 		
 		for(Product product : productList4){
-			if(1 == product.getProductid()){
+			if(1 == product.getId()){
 				assertEquals("Huawei Mate30 Pro", product.getProductname());
 			}
 		}
 	}
 	
 	@Test
-	public void testFindByTypeAndId() {
-		int productid = 1;
+	public void testFindByTypeAndProductid() {
+		String productid = "0001MB0001";
 
 		String type = "1";
 		
@@ -89,7 +89,7 @@ public class ProductDaoTests {
 		List<Product> productList = productDao.findByProductType(type);
 		
 		for(Product product : productList){
-			if(1 == product.getProductid()){
+			if(1 == product.getId()){
 				assertEquals("Huawei Mate30 Pro", product.getProductname());
 			}
 		}
@@ -102,7 +102,7 @@ public class ProductDaoTests {
 		List<Product> productList = productDao.findByProductType2(type);
 		
 		for(Product product : productList){
-			if(1 == product.getProductid()){
+			if(1 == product.getId()){
 				assertEquals("Huawei Mate30 Pro", product.getProductname());
 			}
 		}
@@ -160,45 +160,26 @@ public class ProductDaoTests {
 		assertEquals("Xiaomi CC9 Pro", product2.getProductname());
 	}
 	
-	//新增方法
+	//新增方法 和 修改方法
 	@Test
 	public void testSave(){
 		Product product = new Product();
 		
+		product.setProductid("0002BK0001");
 		product.setProductname("C++ Primer Plus");
 		product.setType("2");
 		product.setPrice(new BigDecimal("78.00"));
 		
 		productDao.save(product);
 		
-		Product product2 = productDao.findByProductname("C++ Primer Plus");
+		Product product2 = productDao.findOneByProductid("0002BK0001");
 		assertEquals(new BigDecimal("78.00"), product2.getPrice());
-	}
-
-	//修改方法
-	@Test
-	public void testUpdate(){
 		
-		Product product = productDao.findByProductname("数学之美");
+		productDao.updateProduct(new BigDecimal("68.00"), "0002BK0001");
 		
-		if(product == null){
-			product = new Product();
-			
-			product.setProductname("数学之美");
-			product.setType("2");
-			product.setPrice(new BigDecimal("36.50"));
-			
-			productDao.save(product);
-		}else{
-			productDao.updateProduct(new BigDecimal("36.50"), "数学之美");
-		}
+		product2 = productDao.findOneByProductid("0002BK0001");
+		assertEquals(new BigDecimal("68.00"), product2.getPrice());
 		
-		Product product2 = productDao.findByProductname("数学之美");
-		assertEquals(new BigDecimal("36.50"), product2.getPrice());
-		
-		productDao.updateProduct(new BigDecimal("30.50"), "数学之美");
-		
-		product2 = productDao.findByProductname("数学之美");
-		assertEquals(new BigDecimal("30.50"), product2.getPrice());
+		productDao.delete(product2);
 	}
 }
