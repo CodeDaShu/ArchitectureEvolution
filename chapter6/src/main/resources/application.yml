@@ -13,3 +13,9 @@ spring:
     username: root
     #密码
     password: root
+    
+logging:
+  config: classpath:logback.xml
+  level:
+    com.archevolution: info
+  path: /logs
