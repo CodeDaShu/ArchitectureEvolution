@@ -25,6 +25,9 @@ public interface ProductDao extends PagingAndSortingRepository<Product, Integer>
 	//按照姓名查询
 	public Product findByProductname(String productname);
 	
+	//按照商品编号查询
+	public Product findByProductid(String productid);
+	
 	//查询所有
 	public List<Product> findAll();
 	
