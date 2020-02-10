@@ -29,7 +29,7 @@ public class DictService {
 		//现在缓存中查询，如果能查询到，则直接返回
 		if(PermCache.PRODUCT_TYPE_CACHE != null 
 				&& !StringUtils.isEmpty(PermCache.PRODUCT_TYPE_CACHE.get(code))){
-			logger.info("Get data from cache");
+			logger.info("Get data from {}", "cache");
 			return PermCache.PRODUCT_TYPE_CACHE.get(code);
 		}else{
 			logger.info("Get data from database");
