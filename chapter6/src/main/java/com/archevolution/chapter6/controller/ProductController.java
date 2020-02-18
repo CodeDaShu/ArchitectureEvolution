@@ -24,13 +24,13 @@ public class ProductController {
 	ProductService productService ;
 	
 	/**
-	 * 根据用户 ID 查询用户信息（不带手机号）
+	 * 根据商品 ID 查询商品
 	 * @param userId
 	 * @return
 	 */
 	@RequestMapping(value = "/queryProduct/{id}")
 	@ResponseBody
-    public JsonResponse queryUserById(@PathVariable("id") int id){
+    public JsonResponse queryProductById(@PathVariable("id") int id){
 		JsonResponse res = new JsonResponse();
 		
 		if(id < 1){

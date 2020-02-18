@@ -15,31 +15,31 @@ import com.archevolution.chapter7.dto.JsonResponse;
 import com.archevolution.chapter7.dto.ProductDTO;
 import com.archevolution.chapter7.dto.ResponseCode;
 import com.archevolution.chapter7.model.Product;
-import com.archevolution.chapter7.service.ProductService;
+import com.archevolution.chapter7.service.ProductCacheService;
 
 @RestController
-public class ProductController {
+public class ProductCacheController {
 	
 	@Autowired
-	ProductService productService ;
+	ProductCacheService productCacheService ;
 	
 	/**
 	 * 根据商品 ID 查询商品
 	 * @param userId
 	 * @return
 	 */
-	@RequestMapping(value = "/queryProduct/{id}")
+	@RequestMapping(value = "/queryProductByProId/{productid}")
 	@ResponseBody
-    public JsonResponse queryProductById(@PathVariable("id") int id){
+    public JsonResponse queryUserById(@PathVariable("productid") String productid){
 		JsonResponse res = new JsonResponse();
 		
-		if(id < 1){
+		if("".equals(productid)){
 			res.setCode(ResponseCode.PARAMETER_ERROR);
 			res.setMessage("参数不正确");
 			return res;
 		}
 		
-		Product product = productService.findOneById(id);
+		Product product = productCacheService.findByProductid(productid);
 		
 		if(product != null){
 			res.setCode(ResponseCode.SUCCESS);
