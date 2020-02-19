@@ -1,4 +1,4 @@
-package com.archevolution.chapter7.controller;
+package com.archevolution.chapter8.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.archevolution.chapter7.dto.JsonResponse;
-import com.archevolution.chapter7.dto.ProductDTO;
-import com.archevolution.chapter7.dto.ResponseCode;
-import com.archevolution.chapter7.model.Product;
-import com.archevolution.chapter7.service.ProductService;
+import com.archevolution.chapter8.dto.JsonResponse;
+import com.archevolution.chapter8.dto.ProductDTO;
+import com.archevolution.chapter8.dto.ResponseCode;
+import com.archevolution.chapter8.model.Product;
+import com.archevolution.chapter8.service.ProductService;
 
 @RestController
 public class ProductController {
@@ -59,5 +59,4 @@ public class ProductController {
 		
         return res;
     }
-	
 }
