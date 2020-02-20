@@ -24,10 +24,9 @@ public class ExpireCache {
 	public static final long THREAD_RUN_TIME = 10 * 1000L;
 	
 	//启动清理缓存的线程
-    static {
+    /*static {
         new Thread(new CleanExpireCacheThread()).start();
-    }
-
+    }*/
 	
 	/**
 	 * 清除过期缓存
