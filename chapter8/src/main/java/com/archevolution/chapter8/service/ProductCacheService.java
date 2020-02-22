@@ -19,7 +19,8 @@ public class ProductCacheService {
 	@Autowired
 	ProductDao productDao;
 	
-	@Cacheable("person")
+	//@Cacheable("product")
+	@Cacheable(value="product", key="#productid", condition="#productid.length() <= 10") //productid 长度超过 10 的不会被缓存，举例使用，没有什么实际用处
 	public Product findByProductid(String productid){
 		return productDao.findByProductid(productid);
 	}
