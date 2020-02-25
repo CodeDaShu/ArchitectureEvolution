@@ -1,12 +1,8 @@
 package com.archevolution.chapter8.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import org.apache.ibatis.annotations.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,8 +35,8 @@ public class ProductCacheController {
 			return res;
 		}
 		
-		//Product product = productCacheService.findByProductid(productid);
-		Product product = productCacheService.findByProductid2(productid);
+		Product product = productCacheService.findByProductid(productid);
+		//Product product = productCacheService.findByProductid2(productid);
 		
 		if(product != null){
 			res.setCode(ResponseCode.SUCCESS);

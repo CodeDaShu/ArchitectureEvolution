@@ -69,7 +69,7 @@
 		</dependency>
 		
 		<dependency>
-		    <groupId>org.ehcache</groupId>
+		    <groupId>net.sf.ehcache</groupId>
 		    <artifactId>ehcache</artifactId>
 		</dependency>
 	</dependencies>

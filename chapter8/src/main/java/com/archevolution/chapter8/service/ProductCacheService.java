@@ -14,6 +14,7 @@ import com.archevolution.chapter8.dao.ProductDao;
 import com.archevolution.chapter8.model.Product;
 
 //@CacheConfig(cacheNames="product")
+@CacheConfig(cacheNames="productEhCache")
 @Service
 public class ProductCacheService {
 	private static Logger logger = LoggerFactory.getLogger(ProductCacheService.class);
@@ -21,10 +22,10 @@ public class ProductCacheService {
 	@Autowired
 	ProductDao productDao;
 	
-	//@Cacheable
+	@Cacheable
 	//@Cacheable("product")
 	//@Cacheable(value="product", key="#productid", condition="#productid.length() <= 10") //productid 长度超过 10 的不会被缓存，举例使用，没有什么实际用处
-	@Cacheable(value="product", key="#productid", unless="#result == null") //如果查询结果为空，就不缓存了
+	//@Cacheable(value="product", key="#productid", unless="#result == null") //如果查询结果为空，就不缓存了
 	public Product findByProductid(String productid){
 		return productDao.findByProductid(productid);
 	}

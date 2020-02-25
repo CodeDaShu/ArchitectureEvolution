@@ -1,5 +1,6 @@
 package com.archevolution.chapter8.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -9,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="PRODUCT")
-public class Product {
+public class Product implements Serializable{
 	@Id
 	private int id;//主键，自增长
 	private String productid;//商品编号

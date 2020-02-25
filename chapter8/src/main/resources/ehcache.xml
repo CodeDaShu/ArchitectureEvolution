@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
-    <diskStore path="java.io.tmpdir"/>
+    <diskStore path="E:\\ehcache"/>
     <defaultCache
             maxElementsInMemory="1000"
             eternal="false"
@@ -14,7 +14,7 @@
             memoryStoreEvictionPolicy="LRU">
     </defaultCache>
     
-    <cache name="productCache"
+    <cache name="productEhCache"
             maxElementsInMemory="1000"
             eternal="false"
             timeToIdleSeconds="120"
