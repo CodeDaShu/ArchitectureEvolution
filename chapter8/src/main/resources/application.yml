@@ -13,6 +13,10 @@ spring:
     username: root
     #密码
     password: root
+  cache:
+    type: caffeine
+    caffeine:
+      spec: initialCapacity=100,maximumSize=500,expireAfterWrite=30s
     
 logging:
   config: classpath:logback.xml
