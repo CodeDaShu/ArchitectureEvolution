@@ -1,0 +1,15 @@
+# 配置端口
+server:
+  port: 8088
+
+#数据源配置
+spring:
+  datasource:
+    #数据库驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #数据库 url
+    url: jdbc:mysql://127.0.0.1:3306/arch?characterEncoding=UTF-8&serverTimezone=UTC
+    #用户名
+    username: root
+    #密码
+    password: root
