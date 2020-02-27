@@ -14,14 +14,14 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.JpaSort;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.archevolution.chapter9.Chapter8Application;
+import com.archevolution.chapter9.Chapter9Application;
 import com.archevolution.chapter9.dao.ProductDao;
 import com.archevolution.chapter9.model.Product;
 
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = Chapter8Application.class)
+@SpringBootTest(classes = Chapter9Application.class)
 public class ProductDaoTests {
 
 	@Autowired

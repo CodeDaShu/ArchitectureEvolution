@@ -6,9 +6,9 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @EnableCaching
 @SpringBootApplication
-public class Chapter8Application {
+public class Chapter9Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Chapter8Application.class, args);
+		SpringApplication.run(Chapter9Application.class, args);
 	}
 }

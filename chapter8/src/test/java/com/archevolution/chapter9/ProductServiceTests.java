@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.archevolution.chapter9.Chapter8Application;
+import com.archevolution.chapter9.Chapter9Application;
 import com.archevolution.chapter9.model.Product;
 import com.archevolution.chapter9.service.ProductService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = Chapter8Application.class)
+@SpringBootTest(classes = Chapter9Application.class)
 public class ProductServiceTests {
 	
 	private static Logger logger = LoggerFactory.getLogger(ProductServiceTests.class);
