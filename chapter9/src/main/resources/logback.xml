@@ -135,7 +135,7 @@
     <logger name="org.mybatis.spring" level="INFO" additivity="false" />
     
     <!-- logger设置输出到文件，输出级别为info -->
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="DEBUG" />
         <appender-ref ref="ERROR" />
