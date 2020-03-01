@@ -1,5 +1,7 @@
 package com.archevolution.chapter9;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
@@ -36,16 +38,25 @@ public class RedisTemplateTests {
     	redisTemplate.opsForValue().set("key03", "value0003", 60, TimeUnit.SECONDS);	
     	logger.info("key03's value = {}" , redisTemplate.opsForValue().get("key03"));
     	
-    	//redisTemplate.opsForValue().set("key04", 10);	
-    	//logger.info("key04's value = {}" , redisTemplate.opsForValue().get("key04")); 	
+    	redisTemplate.opsForValue().set("key04", 10);	
+    	logger.info("key04's value = {}" , redisTemplate.opsForValue().get("key04")); 	
     	
-    	//redisTemplate.opsForValue().increment("key04", 20);
-    	//logger.info("key04's value = {}" , redisTemplate.opsForValue().get("key04")); 	
+    	redisTemplate.opsForValue().increment("key04", 20);
+    	logger.info("key04's value = {}" , redisTemplate.opsForValue().get("key04")); 	
     }
     
     @Test
     public void StringRedisTemplateTest() {
     	strRedisTemplate.opsForValue().set("key02", "value0002");	
     	logger.info("key02's value = {}" , strRedisTemplate.opsForValue().get("key02"));
+    }
+    
+    @Test
+    public void HashTemplateTest() {
+    	Map<String, Integer> maps = new HashMap<String, Integer>();
+    	maps.put("product_001", 4);
+    	maps.put("product_002", 4);
+    	
+    	redisTemplate.opsForHash().putAll("user0001", maps);
     }
 }
