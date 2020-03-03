@@ -2,6 +2,7 @@ package com.archevolution.chapter9;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
@@ -55,8 +56,25 @@ public class RedisTemplateTests {
     public void HashTemplateTest() {
     	Map<String, Integer> maps = new HashMap<String, Integer>();
     	maps.put("product_001", 4);
-    	maps.put("product_002", 4);
+    	maps.put("product_002", 1);
     	
     	redisTemplate.opsForHash().putAll("user0001", maps);
+    	
+    	//添加
+    	redisTemplate.opsForHash().put("user0001", "product_003", 2);
+    	redisTemplate.opsForHash().put("user0001", "product_004", 1);
+    	
+    	//删除
+    	redisTemplate.opsForHash().delete("user0001", "product_003");	
+    	
+    	//查询 HashMap 中所有的键 keys，结果为 product_001/2/4
+    	Set<Object> sets = redisTemplate.opsForHash().keys("user0001");
+    	
+    	//查询 HashMap 中的是否存在 key=field 的键值
+    	//查询 user001 中的 key = product_001 对应的值，结果为 4
+    	redisTemplate.opsForHash().get("user0001", "product_001"); 
+    	
     }
+    
+    
 }
