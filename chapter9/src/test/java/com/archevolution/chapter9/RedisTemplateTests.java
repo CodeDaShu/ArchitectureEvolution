@@ -1,6 +1,8 @@
 package com.archevolution.chapter9;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -76,5 +78,29 @@ public class RedisTemplateTests {
     	
     }
     
-    
+    @Test
+    public void ListTemplateTest() {
+    	//左插入：A
+    	redisTemplate.opsForList().leftPush("list","A");
+    	//左插入：B-A
+    	redisTemplate.opsForList().leftPush("list","B");
+    	//左插入：C-B-A
+    	redisTemplate.opsForList().leftPush("list","C");
+    	//右插入：C-B-A-D
+    	redisTemplate.opsForList().rightPush("list","D");
+    	//把 E 放在第一个 A 的左边：C-B-E-A-D
+    	redisTemplate.opsForList().leftPush("list","A","E");  
+    	//把 F 放在第一个 A 的左边：C-B-E-A-F-D
+    	redisTemplate.opsForList().rightPush("list","A","F");  
+    	
+    	//查询所有的元素：C-B-E-A-F-D
+    	List<Object> list =  redisTemplate.opsForList().range("list",0,-1);
+    	
+    	//移除最左边的：B-E-A-F-D
+    	redisTemplate.opsForList().leftPop("list");
+    	//移除最右边的：B-E-A-F
+    	redisTemplate.opsForList().rightPop("list");
+    	//移除集合中右边的元素，放入另一个指定队列的最左边：B-E-A  F
+    	redisTemplate.opsForList().rightPopAndLeftPush("list", "list2");
+    }
 }
