@@ -1,4 +1,4 @@
-package com.archevolution.chapter9;
+package com.archevolution.chapter10;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,9 +14,9 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.JpaSort;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.archevolution.chapter9.Chapter8Application;
-import com.archevolution.chapter9.dao.ProductDao;
-import com.archevolution.chapter9.model.Product;
+import com.archevolution.chapter10.Chapter8Application;
+import com.archevolution.chapter10.dao.ProductDao;
+import com.archevolution.chapter10.model.Product;
 
 import static org.junit.Assert.assertEquals;
 

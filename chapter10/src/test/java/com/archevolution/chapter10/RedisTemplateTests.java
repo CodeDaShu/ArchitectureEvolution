@@ -1,4 +1,4 @@
-package com.archevolution.chapter9;
+package com.archevolution.chapter10;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +19,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.archevolution.chapter9.Chapter8Application;
+import com.archevolution.chapter10.Chapter8Application;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Chapter8Application.class)

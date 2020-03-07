@@ -1,4 +1,4 @@
-package com.archevolution.chapter9;
+package com.archevolution.chapter10;
 
 import java.util.List;
 
@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.archevolution.chapter9.Chapter8Application;
-import com.archevolution.chapter9.model.Product;
-import com.archevolution.chapter9.service.ProductCacheService;
-import com.archevolution.chapter9.service.ProductService;
+import com.archevolution.chapter10.Chapter8Application;
+import com.archevolution.chapter10.model.Product;
+import com.archevolution.chapter10.service.ProductCacheService;
+import com.archevolution.chapter10.service.ProductService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Chapter8Application.class)
