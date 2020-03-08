@@ -156,4 +156,12 @@ public class RedisTemplateTests {
     	logger.info("从大到小排序后，获取分数在 100-200 之间，获取指定范围内所有元素（排名的顺序）  = {}" , redisTemplate.opsForZSet().reverseRangeByScore("zset", 100, 200, 0, -1));
     	
     }
+    
+    @Test
+    public void randomExpireTest(){
+    	for(int i = 0 ; i < 100 ; i++){
+    		redisTemplate.opsForValue().set("key"+i, "value"+i, 
+    				60*60*24 + ((int) (System.currentTimeMillis() % 6000)), TimeUnit.SECONDS );
+    	}
+    }
 }
